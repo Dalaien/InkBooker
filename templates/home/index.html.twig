@@ -1,20 +1,107 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil — InkBooker{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {# Header homePage#}
+    <section class="hero">
+        <div class="hero-inner container">
+            <h1 class="hero-title">Bienvenue sur InkBooker</h1>
+            <p class="hero-subtitle">
+                Planifiez facilement vos rendez-vous, découvrez nos artistes et suivez vos projets en toute simplicité.
+            </p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="#">Prendre rendez-vous</a>
+                <a class="btn btn-light" href="#">Découvrir nos artistes</a>
+            </div>
+        </div>
+    </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/Alessio/PhpstormProjects/InkBooker/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Users/Alessio/PhpstormProjects/InkBooker/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
+    <section class="grid grid-2">
+        <div class="card">
+            <h2 class="section-title">Trouver votre artiste</h2>
+            <p class="muted">Recherchez un artiste ou un style.</p>
+            <div class="row">
+                <input class="input" type="text" placeholder="Rechercher un artiste ou un style">
+                <button class="btn btn-primary">Rechercher</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">Pourquoi choisir InkBooker ?</h2>
+            <ul class="list-clean muted">
+                <li>&#x2705; Réservation rapide en ligne</li>
+                <li>&#x2705; Rappels automatiques</li>
+                <li>&#x2705; Paiement sécurisé</li>
+                <li>&#x2705; Artistes vérifiés</li>
+            </ul>
+        </div>
+    </section>
+
+    {# Les services #}
+    <section class="services">
+        <h2 class="section-title">Nos services</h2>
+        <div class="grid grid-4">
+            {% set services = [
+                {title:'Tatouage', text:'Projets personnalisés ou flashs', price:'Dès 60€'},
+                {title:'Piercing', text:'Lobe, cartilage, septum…', price:'Dès 40€'},
+                {title:'Consultation', text:'Devis et conseils gratuits', price:'Gratuit'},
+                {title:'Conception', text:'Création de motifs personnalisés', price:'Sur devis'}
+            ] %}
+            {% for s in services %}
+                <article class="card service-card">
+                    <h3 class="section-title">{{ s.title }}</h3>
+                    <p class="muted">{{ s.text }}</p>
+                    <span class="pill">{{ s.price }}</span>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+
+    {# ARTISTES : A remplacer par les "meilleur" user avec le roles artiste en BDD #}
+    <section class="artists">
+        <h2 class="section-title">Nos artistes</h2>
+        <div class="grid grid-4">
+            {% for artist in [
+                {name:'Charlotte T.', role:'Ornemental'},
+                {name:'Adam B.', role:'Dotwork'},
+                {name:'Olivia J.', role:'Fineline'},
+                {name:'Laura M.', role:'Piercing'}
+            ] %}
+                <article class="card artist-card">
+                    <div class="artist-left">
+                        <span class="avatar"></span>
+                        <div class="artist-meta">
+                            <div><strong>{{ artist.name }}</strong></div>
+                            <div class="muted">{{ artist.role ?? '—' }}</div>
+                        </div>
+                    </div>
+                    <div class="artist-actions">
+                        <a class="btn" href="#">Voir profil</a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+
+    {# FAQ + CTA #}
+    <section class="cta grid grid-2">
+        <div class="card">
+            <h2 class="section-title">Planifiez votre prochain rendez-vous</h2>
+            <p class="muted">Vérifiez les disponibilités de nos artistes et réservez en quelques secondes.</p>
+            <a class="btn btn-primary" href="#">Prendre rendez-vous</a>
+        </div>
+
+        <div class="card">
+            <h2 class="section-title">Foire aux questions</h2>
+            <ul class="list-clean">
+                <li><a class="link" href="#">Comment préparer mon rendez-vous ?</a></li>
+                <li><a class="link" href="#">Puis-je déplacer ou annuler ?</a></li>
+                <li><a class="link" href="#">Quels moyens de paiement ?</a></li>
+                <li><a class="link" href="#">Soins après tatouage</a></li>
+            </ul>
+        </div>
+    </section>
+
 {% endblock %}
